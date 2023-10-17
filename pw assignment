@@ -1,0 +1,160 @@
+KNN-3
+Assignment Questions 
+Assignment 
+Q1. Write a Python code to implement the KNN classifier algorithm on load_iris dataset in  sklearn.datasets. 
+from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import pandas as pd
+iris=load_iris()
+x=iris.data
+y=iris.target
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.33, random_state=42)
+classifier=KNeighborsClassifier()
+classifier.fit(x_train,y_train)
+y_pred=classifier.predict(x_test)
+accuracy=accuracy_score(y_pred,y_test)
+accuracy
+
+Q2. Write a Python code to implement the KNN regressor algorithm on load_boston dataset in  sklearn.datasets. 
+from sklearn.datasets import load_boston
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import pandas as pd
+iris=load_boston()
+x=iris.data
+y=iris.target
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.33, random_state=42)
+classifier=KNeighborsRegressorre()
+classifier.fit(x_train,y_train)
+y_pred=classifier.predict(x_test)
+accuracy=accuracy_score(y_pred,y_test)
+accuracy
+
+Q3. Write a Python code snippet to find the optimal value of K for the KNN classifier algorithm using  cross-validation on load_iris dataset in sklearn.datasets. 
+from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import accuracy_score
+import numpy as np
+import pandas as pd
+iris=load_iris()
+x=iris.data
+y=iris.target
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.33, random_state=42)
+param_grid = {'n_neighbors': np.arange(1, 31)}
+classifier=KNeighborsClassifier()
+grid_search = GridSearchCV(classifier, param_grid, cv=5)
+grid_search.fit(x_train, y_train)
+optimal_k = grid_search.best_params_['n_neighbors']
+print("Optimal K:", optimal_k)
+
+Q4. Implement the KNN regressor algorithm with feature scaling on load_boston dataset in  sklearn.datasets. 
+import numpy as np
+from sklearn.datasets import load_boston
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+
+
+boston = load_boston()
+X = boston.data
+y = boston.target
+
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.33, random_state=42)
+
+
+knn_regressor = KNeighborsRegressor()
+
+
+knn_regressor.fit(X_train, y_train)
+
+
+y_pred = knn_regressor.predict(X_test)
+
+
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("Mean Squared Error:", mse)
+print("R-squared:", r2)
+
+
+Q5. Write a Python code snippet to implement the KNN classifier algorithm with weighted voting on  load_iris dataset in sklearn.datasets. 
+from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import pandas as pd
+iris=load_iris()
+x=iris.data
+y=iris.target
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.33, random_state=42)
+classifier=KNeighborsClassifier(weights='distance')
+classifier.fit(x_train,y_train)
+y_pred=classifier.predict(x_test)
+accuracy=accuracy_score(y_pred,y_test)
+accuracy
+
+
+Q6. Implement a function to standardise the features before applying KNN classifier.
+ Q7. Write a Python function to calculate the euclidean distance between two points.
+import math
+
+def euclidean_distance(x1, y1, x2, y2):
+    """
+    Calculate the Euclidean distance between two points (x1, y1) and (x2, y2).
+    
+    Parameters:
+    x1 (float): x-coordinate of the first point.
+    y1 (float): y-coordinate of the first point.
+    x2 (float): x-coordinate of the second point.
+    y2 (float): y-coordinate of the second point.
+    
+    Returns:
+    float: Euclidean distance between the two points.
+    """
+    return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+
+
+point1 = (0, 0)  # (x1, y1)
+point2 = (3, 4)  # (x2, y2)
+
+distance = euclidean_distance(point1[0], point1[1], point2[0], point2[1])
+print("Euclidean distance:", distance)
+
+
+Q8. Write a Python function to calculate the manhattan distance between two points. 
+def manhattan_distance(x1, y1, x2, y2):
+    """
+    Calculate the Manhattan distance between two points (x1, y1) and (x2, y2).
+    
+    Parameters:
+    x1 (float): x-coordinate of the first point.
+    y1 (float): y-coordinate of the first point.
+    x2 (float): x-coordinate of the second point.
+    y2 (float): y-coordinate of the second point.
+    
+    Returns:
+    float: Manhattan distance between the two points.
+    """
+    return abs(x2 - x1) + abs(y2 - y1)
+
+
+point1 = (0, 0)  # (x1, y1)
+point2 = (3, 4)  # (x2, y2)
+
+distance = manhattan_distance(point1[0], point1[1], point2[0], point2[1])
+print("Manhattan distance:", distance)
+
+
+Note:  Create your assignment in Jupyter notebook and upload it to GitHub & share that github repository  link through your dashboard. Make sure the repository is public.
+Data Science Masters 
